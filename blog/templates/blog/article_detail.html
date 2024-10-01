@@ -1,0 +1,31 @@
+<!doctype html>
+{% extends 'catalog/base.html' %}
+{% block content %}
+{% load my_tags %}
+
+
+<div class="col-3">
+    <div class="card mb-4 box-shadow">
+        <div class="card text-bg-primary mb-0" style="max-width: 20rem;">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{object.title}}</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>Описание: {{object.content}}</li>
+                    <li>Публикация: {{object.is_publishedr}}</li>
+                    <li>Просмотров: {{object.views_count}}</li>
+                    <img class="card-img-topcard-img-top" src="{{ object.image| my_media_filter }}">
+                </ul>
+                <a href="{% url 'blog:list' %}" type="button"
+                   class="btn btn-danger">Назад</a>
+                <a href="{% url 'blog:update' object.pk %}" type="button"
+                   class="btn btn-secondary">Редактировать</a>
+                <a href="{% url 'blog:delete' object.pk %}" type="button"
+                   class="btn btn-secondary">Удалить</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

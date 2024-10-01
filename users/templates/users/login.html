@@ -1,0 +1,22 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<div class="text-center">
+    <div class="card text-bg-primary mb-0" style="max-width: 20rem;">
+        <form method="post">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Авторизация</h4>
+            </div>
+            <div class="card-body">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-danger">Войти</button>
+            </div>
+        </form>
+        <div class="card-footer">
+            <a href="{% url 'users:restore' %}" class="btn btn-danger">Восстановить пароль</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!doctype html>
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+{% load my_tags %}
+<a href="{% url 'blog:create' %}" type="button"
+   class="btn btn-warning">Создать статью</a>
+{% for object in object_list %}
+
+<div class="col-3">
+    <div class="card mb-4 box-shadow">
+        <div class="card text-bg-primary mb-0" style="max-width: 20rem;">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{object.title}}</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>{{object.content|truncatewords:100}}</li>
+                    <li>Цена {{object.price}}</li>
+                    <img class="card-img-topcard-img-top" src="{{ object.image| my_media_filter }}">
+                </ul>
+                <a href="{% url 'blog:detail' object.pk %}" type="button"
+                   class="btn btn-danger">Посмотреть</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

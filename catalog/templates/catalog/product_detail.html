@@ -1,0 +1,24 @@
+<!doctype html>
+{% extends 'catalog/base.html' %}
+{% block content %}
+{% load my_tags %}
+<div class="col-3">
+    <div class="card mb-4 box-shadow">
+        <div class="card text-bg-primary mb-0" style="max-width: 20rem;">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{object.name}}</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>{{object.description|truncatewords:100}}</li>
+                    <li>Цена {{object.price}}</li>
+                    <img class="card-img-top" src="{{ object.image| my_media_filter }}">
+                </ul>
+                <a href="{% url 'catalog:home' %}" type="button"
+                   class="btn btn-danger">Назад</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

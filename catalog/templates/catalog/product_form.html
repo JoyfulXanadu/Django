@@ -1,0 +1,31 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+
+<div class="col-3">
+    <div class="card mb-4 box-shadow">
+        <div class="card text-bg-primary mb-0" style="max-width: 20rem;">
+            <div class="card-header">
+                <h4 class="my-4 font-weight-normal">{{object.title}}</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">
+                        {% if object %}
+                        Сохранить
+                        {% else %}
+                        Создать
+                        {% endif %}
+                    </button>
+                </form>
+                <a href="{% url 'catalog:home' %}" type="button"
+                   class="btn btn-danger">Назад</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
