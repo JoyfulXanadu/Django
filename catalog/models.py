@@ -24,6 +24,7 @@ class Product(models.Model):
     created_at = models.DateField(verbose_name="created", auto_now_add=True)
     update_at = models.DateField(verbose_name="updated", auto_now=True)
     manufactured_at = models.DateField(verbose_name="manufactured", auto_now_add=True)
+    is_active = models.BooleanField(default=False, verbose_name="active")
 
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, verbose_name="category"
@@ -35,6 +36,11 @@ class Product(models.Model):
     class Meta:
         verbose_name_plural = "Products"
         verbose_name = "Product"
+        permissions = [
+            ('editing_is_active', 'Can edit is_active'),
+            ('editing_description', 'Can edit description'),
+            ('editing_category', 'Can edit category'),
+        ]
 
     def __str__(self):
         return self.name

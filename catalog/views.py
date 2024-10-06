@@ -3,8 +3,9 @@ from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView, TemplateView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 
-from catalog.forms import ProductForm
+from catalog.forms import ProductForm, ProductModeratorForm
 from catalog.models import Product, Category, ProductVersion
 
 
@@ -64,6 +65,17 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('catalog:product', args=[self.object.pk])
+
+    def get_form_class(self):
+        user = self.request.user
+        if (user.has_perm('catalog.editing_is_active') and
+                user.has_perm('catalog.editing_description') and
+                user.has_perm('catalog.editing_category')):
+            return ProductModeratorForm
+        elif user == self.object.owner:
+            return ProductForm
+        else:
+            raise PermissionDenied
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):

@@ -31,7 +31,14 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
             raise forms.ValidationError(f'Содержит запрещенное слово: {cleaned_data}. Введите другое описание продукта')
         return cleaned_data
 
+
 class ProductVersionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
+
+
+class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('is_active', 'description', 'category')

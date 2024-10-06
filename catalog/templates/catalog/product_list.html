@@ -20,8 +20,10 @@
                 </ul>
                 <a href="{% url 'catalog:product' object.pk %}" type="button"
                    class="btn btn-danger">Купить</a>
+                {% if perms.catalog.editing_is_active and perms.catalog.editing_description and perms.catalog.editing_category or user == object.owner%}
                 <a href="{% url 'catalog:product_update' object.pk %}" type="button"
                    class="btn btn-secondary">Редактировать</a>
+                {% endif %}
                 <a href="{% url 'catalog:product_delete' object.pk %}" type="button"
                    class="btn btn-secondary">Удалить</a>
             </div>
