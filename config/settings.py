@@ -133,8 +133,8 @@ AUTH_USER_MODEL = 'users.User'
 
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
-EMAIL_HOST_USER = "generals22@mail.ru"
-EMAIL_HOST_PASSWORD = "dZuSChnFf4yZBrCuM4eF"
+EMAIL_HOST_USER = "reetenders@yandex.ru"
+EMAIL_HOST_PASSWORD = "77otolot"
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
 
