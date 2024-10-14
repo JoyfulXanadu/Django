@@ -4,6 +4,7 @@ from django.views.generic import DetailView, ListView, TemplateView, UpdateView,
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from catalog.services import model_objects_all
 
 from catalog.forms import ProductForm, ProductModeratorForm
 from catalog.models import Product, Category, ProductVersion
@@ -26,7 +27,7 @@ class ProductListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        products = self.get_queryset()
+        products = model_objects_all(Product)
         return context
 
 
